@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine's Day</title>
+  <style>
+    /* CSS styles for the Valentine's Day content */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #fde5ec;
+    }
+  
+    .valentine-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      padding: 20px;
+    }
+  
+    .valentine-content {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+  
+    .valentine-content:hover {
+      transform: translateY(-5px);
+    }
+  
+    .valentine-content img {
+      width: 200px;
+      margin-bottom: 20px;
+    }
+  
+    .buttons button {
+      padding: 10px 20px;
+      margin: 0 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+  
+    .yesButton {
+      background-color: #32CD32;
+      color: #fff;
+    }
+  
+    .noButton {
+      background-color: #FF6347;
+      color: #fff;
+    }
+  </style>
+  <link rel="icon" type="image/png" href="https://stickers.gg/assets/stickers/3361-bear-love.png">
+</head>
+<body>
+  <div id="valentine-container" class="valentine-container">
+    <!-- Content will be dynamically generated here -->
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const phrases = [
+        "No",
+        "Are you sure?",
+        "Really sure?",
+        "Hebe please?",
+        "Don't do this to me",
+        "I'm gonna cry",
+        "You are breaking my heart ;(",
+      ];
+    
+      const valentineContainer = document.getElementById("valentine-container");
+    
+      function createValentineContent() {
+        const container = document.createElement("div");
+        container.classList.add("valentine-content");
+    
+        const img = new Image();
+        img.src = "https://media1.tenor.com/m/i-EiA87Hy4QAAAAd/kiss-day.gif";
+        img.alt = "bears with hearts";
+    
+        const question = document.createElement("div");
+        question.textContent = "Will you be my valentine?";
+    
+        const buttonsDiv = document.createElement("div");
+        buttonsDiv.classList.add("buttons");
+    
+        const createButton = (text, className) => {
+          const button = document.createElement("button");
+          button.textContent = text;
+          button.classList.add(className);
+          return button;
+        };
+    
+        const yesButton = createButton("Yes", "yesButton");
+        const noButton = createButton("No", "noButton");
+    
+        buttonsDiv.append(yesButton, noButton);
+        container.append(img, question, buttonsDiv);
+        valentineContainer.appendChild(container);
+    
+        let noCount = 0;
+    
+        yesButton.addEventListener("click", function() {
+          container.innerHTML = `
+            <img src="https://media1.tenor.com/m/J3o-7E-2JGAAAAAd/emuahh.gif" alt="bears kissing">
+            <div class="text">Yay!!!</div>
+          `;
+        });
+    
+        noButton.addEventListener("click", function() {
+          const currentCount = Math.min(noCount, phrases.length - 1);
+          noButton.textContent = phrases[currentCount];
+          noCount++;
+          yesButton.style.fontSize = `${noCount * 20 + 16}px`; // Increase the font size of the green button
+        });
+      }
+    
+      // Create the Valentine's Day content
+      createValentineContent();
+    });
+  </script>
+</body>
+</html>
